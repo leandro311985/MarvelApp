@@ -8,7 +8,7 @@ import com.study.marvel.model.CharacterResults
 import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {
-    private var results: CharacterResults? = null
+    private var result: CharacterResults? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,23 +17,23 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
         intent.extras.let {
-            results = it?.getParcelable(MainActivity.CHARACTER_EXTRA)
+            result = it?.getParcelable(MainActivity.CHARACTER_EXTRA)
         }
 
-        title = results?.name
+        title = result?.name
 
         Glide.with(this)
-            .load(results?.thumbnail?.path + "/portrait_incredible." + results?.thumbnail?.extension)
+            .load(result?.thumbnail?.path + "/portrait_incredible." + result?.thumbnail?.extension)
             .into(detail_thumnail)
 
-        detail_title.text = results?.name ?: getString(R.string.title)
+        detail_title.text = result?.name ?: getString(R.string.title)
 
-        when (results?.description) {
+        when (result?.description) {
             "" -> {
                 detail_description.text = getString(R.string.description)
             }
             else -> {
-                detail_description.text = results?.description
+                detail_description.text = result?.description
             }
         }
 
