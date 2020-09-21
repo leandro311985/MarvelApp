@@ -9,6 +9,7 @@ import com.study.marvelapp.R
 import com.study.marvelapp.model.CharacterResults
 import com.study.marvelapp.utils.gone
 import com.study.marvelapp.utils.launchActivity
+import com.study.marvelapp.utils.state.Status
 import com.study.marvelapp.utils.visible
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -27,7 +28,22 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.getCharacters()
         viewModel.characterListLiveData.observe(this, Observer {
-            adapter.submitList(it?.data?.results)
+            when (it.status) {
+                Status.SUCCESS -> {
+                    progressBar?.gone()
+                    adapter.submitList(it?.data?.data?.results)
+                }
+                Status.LOADING -> {
+                    progressBar?.visible()
+
+                }
+                Status.ERROR -> {
+                    Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                    progressBar?.gone()
+
+                }
+            }
+
         })
 
         viewModel.progressLiveData.observe(

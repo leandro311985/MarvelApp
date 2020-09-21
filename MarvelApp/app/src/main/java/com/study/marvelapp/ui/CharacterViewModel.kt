@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.study.marvelapp.model.CharacterResponse
 import com.study.marvelapp.repository.CharacterRepository
+import com.study.marvelapp.utils.state.Resource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -17,7 +18,7 @@ class CharacterViewModel(private val repository: CharacterRepository) : ViewMode
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.IO + job
 
-    val characterListLiveData = MutableLiveData<CharacterResponse>()
+    val characterListLiveData = MutableLiveData<Resource<CharacterResponse>>()
     val errorLiveData = MutableLiveData<String>()
     val progressLiveData = MutableLiveData<Boolean>()
 
@@ -25,7 +26,7 @@ class CharacterViewModel(private val repository: CharacterRepository) : ViewMode
         progressLiveData.postValue(true)
         launch {
             try {
-                characterListLiveData.postValue(repository.getCharacters().body())
+                characterListLiveData.postValue(Resource.success(repository.getCharacters().body()))
             } catch (e: Exception) {
                 Timber.e(e)
                 errorLiveData.postValue("Something went wrong!")
