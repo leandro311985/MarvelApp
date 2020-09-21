@@ -7,7 +7,7 @@ import com.study.marvelapp.R
 import com.study.marvelapp.model.CharacterResults
 import kotlinx.android.synthetic.main.activity_details2.*
 
-class DetailsActivity2 : AppCompatActivity() {
+class DetailsActivity : AppCompatActivity() {
     private var results: CharacterResults? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

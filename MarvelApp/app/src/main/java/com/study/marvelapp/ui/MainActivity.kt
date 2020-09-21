@@ -1,8 +1,8 @@
 package com.study.marvelapp.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.study.marvelapp.R
@@ -30,7 +30,9 @@ class MainActivity : AppCompatActivity() {
             adapter.submitList(it?.data?.results)
         })
 
-        viewModel.progressLiveData.observe(this, Observer { if (it!!) progressBar.visible() else progressBar.gone() })
+        viewModel.progressLiveData.observe(
+            this,
+            Observer { if (it!!) progressBar.visible() else progressBar.gone() })
 
         viewModel.errorLiveData.observe(this, Observer { error ->
             error?.let { Toast.makeText(this, error, Toast.LENGTH_SHORT).show() }
@@ -38,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onCharacterClick(results: CharacterResults) {
-        launchActivity<DetailsActivity2> {
+        launchActivity<DetailsActivity> {
             putExtra(CHARACTER_EXTRA, results)
         }
     }
