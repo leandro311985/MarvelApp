@@ -8,9 +8,9 @@
     <application
         android:name=".MarvelApp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/marvel_studios_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/marvel_studios_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.DetailActivity"
