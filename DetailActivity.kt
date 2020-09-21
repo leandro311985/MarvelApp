@@ -17,7 +17,7 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
         intent.extras.let {
-            results = it?.getParcelable<CharacterResults>(MainActivity.CHARACTER_EXTRA)
+            results = it?.getParcelable(MainActivity.CHARACTER_EXTRA)
         }
 
         title = results?.name
